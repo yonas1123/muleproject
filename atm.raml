@@ -1,0 +1,65 @@
+#%RAML 1.0
+title: ATM-Api
+baseUri: http://localhost:8081/atm
+mediaType:
+  - application/json
+
+/creatAccount:
+  post:
+    queryParameters:
+      customerName:
+        type: string
+        maxLength: 45
+        minLength: 4
+        required: true
+      bank:
+        type: string
+        enum: ["CICI" , "AXIS" ,"HDFC"]
+      type:
+
+           
+
+    responses:
+      201:
+        body:
+          application/json:
+                
+/checkBalance:
+  post:
+    body:
+      application/json:
+    responses:
+      200:
+        body:
+          application/json:
+
+/withDraw:
+  post:
+    body:
+      application/json:
+    responses:
+      200:
+        body:
+          application/json:
+
+
+/unblock:
+  put:
+    body:
+      application/json:
+    responses:
+      200:
+        body:
+          application/json:
+                
+            
+
+          
+        
+        
+
+
+
+
+    
+    
