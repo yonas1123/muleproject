@@ -16,9 +16,44 @@ mediaType:
         type: string
         enum: ["CICI" , "AXIS" ,"HDFC"]
       type:
+        required: true
+        type: 
+        enum: ["current" , "saving"]
+      branchName:
+        required: true
+        type: string
+        maxLength: 10
+        minLength: 4
+    body:
+      application/json:
+        example: |
+          { 
+            "accountNum": {
+              "required": "true",
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 10,
+            }
+            "atmPin" : {
+              required: true,
+              type: string,
+              minLength: 4,
+              maxLength: 4
+            }
 
-           
+          }
+        
+        
+  
+   
 
+
+    
+
+        
+          
+      
+    
     responses:
       201:
         body:
