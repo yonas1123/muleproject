@@ -13,6 +13,7 @@ mediaType:
         minLength: 4
         required: true
       bank:
+        required: true
         type: string
         enum: ["CICI" , "AXIS" ,"HDFC"]
       type:
@@ -29,72 +30,142 @@ mediaType:
         example: |
           { 
             "accountNum": {
-              "required": "true",
-              "type": "string",
+              "required": true,
+              "type": string,
               "minLength": 10,
-              "maxLength": 10,
+              "maxLength": 10
             }
-            "atmPin" : {
-              required: true,
-              type: string,
-              minLength: 4,
-              maxLength: 4
+            "atmPin": {
+              "required": true,
+              "type": string,
+              "minLength": 4,
+              "maxLength": 4,
             }
-
+            "ifscCode": {
+            "required": true,
+            "type": string,
+            "minLength": 4,
+            "maxLength": 10,
+            }
+            "depositAmount": {
+              "required": false,
+              "type": int,
+             }
+            "mailed": {
+              "required": true,
+              "type": string,
+            } 
+            "contact" : {
+              "required": true,
+              "type" : string,
+            }
           }
-        
-        
-  
-   
-
-
-    
-
-        
-          
-      
-    
     responses:
-      201:
+      201: 
         body:
           application/json:
-                
+            example:
+              {
+                "response": {"status": "Account Created Successfully with Account Number 123456"}
+              }
+               
 /checkBalance:
   post:
+   queryParameters:
+      bank:
+        required: true
+        type: string
+        enum: ["CICI" , "AXIS" ,"HDFC"]
+      type:
+        required: true
+        type: 
+        enum: ["current" , "saving"]
     body:
       application/json:
+        example: |
+          { 
+            "accountNum": {
+              "required": true,
+              "type": string,
+              "minLength": 10,
+              "maxLength": 10
+            }
+            "atmPin": {
+              "required": true,
+              "type": string,
+              "minLength": 4,
+              "maxLength": 4,
+            }
     responses:
-      200:
+      200: 
         body:
           application/json:
-
+            example:
+              {
+                "response": {"status": "Amount is debited. your total balanceis 123"}
+              }
 /withDraw:
   post:
+    queryParameters:
+      bank:
+        required: true
+        type: string
+        enum: ["CICI" , "AXIS" ,"HDFC"]
+      type:
+        required: true
+        type: 
+        enum: ["current" , "saving"]
     body:
       application/json:
+        example: |
+          { 
+            "accountNum": {
+              "required": true,
+              "type": string,
+              "minLength": 10,
+              "maxLength":10
+            }
+            "atmPin": {
+              "required": true,
+              "type": string,
+              "minLength": 4,
+              "maxLength": 4
+            "amountToBeWithdraw": {
+              "required": true,
+              "type": string,
+            }
+          }
     responses:
-      200:
+      200: 
         body:
           application/json:
-
+            example:
 
 /unblock:
   put:
     body:
       application/json:
+        example: |
+          {
+             "user": "admin",
+             "Password": "Admin",
+            "accountNum": {
+              "required": true,
+              "type": string,
+              "minLength": 10,
+              "maxLength": 10
+            }
+            "bank": {
+              "required": true,
+              "type": string,
+              enum: ["CICI" , "AXIS" ,"HDFC"],
+            }
+          }
     responses:
-      200:
+      200: 
         body:
           application/json:
-                
-            
-///
-          
-        
-        
-
-
-
-
-    
-    
+            example:
+              {
+                "response": {"status": "Account 123 is unblocked"}
+              }
